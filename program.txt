@@ -1,0 +1,20 @@
+Procedure SubA [Var a,b,c]
+Var d;
+Start
+    d = a + b + c - 1;
+    ExitZero d;
+    Call SubB;
+End
+Procedure SubB
+Start
+    a = 4;
+    Print a;
+End
+Procedure Main
+Var d,e,f;
+Start
+    d = 1;
+    e = 2;
+    f = 3;
+    Call SubA [d,e,f];
+End
