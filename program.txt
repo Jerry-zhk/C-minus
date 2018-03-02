@@ -1,17 +1,17 @@
 Procedure SubA [Var a,b,c]
 Var d;
 Start
-    d = a + b + c + W - 1;
+    d = a + b + c - 1;
     ExitZero d;
-    Call SubBX;
+    Call SubB;
 End
 Procedure SubB
-Var a, Z;
+Var a;
 Start
     a = 4;
     Print a;
 End
-Procedure Main[Var a,b,c]
+Procedure Main
 Var d,e,f;
 Start
     d = 12;

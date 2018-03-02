@@ -2,39 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2ee1c2e3-3f2b-4166-a37a-b7fbfaf1562e" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/cm/compiler/Compiler.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/cm/node/token/SimpleToken.java" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/program.txt" afterPath="$PROJECT_DIR$/program.txt" />
-      <change beforePath="$PROJECT_DIR$/src/cm/lexer/Lexer.java" afterPath="$PROJECT_DIR$/src/cm/lexer/Lexer.java" />
-      <change beforePath="$PROJECT_DIR$/src/cm/lexer/LexicalHelper.java" afterPath="$PROJECT_DIR$/src/cm/lexer/LexicalHelper.java" />
-      <change beforePath="$PROJECT_DIR$/src/cm/node/token/ArithmeticOperator.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/cm/node/token/Assignable.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/cm/node/token/Block.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/cm/node/token/BlockAssignment.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/cm/node/token/BlockCall.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/cm/node/token/BlockDeclaration.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/cm/node/token/BlockExitZero.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/cm/node/token/BlockExpression.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/cm/node/token/BlockPrint.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/cm/node/token/BlockProcedure.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/cm/node/token/BlockProcedureList.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/cm/node/token/BlockProgram.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/cm/node/token/BlockStatement.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/cm/node/token/BlockStatementList.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/cm/node/token/BlockVariable.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/cm/node/token/BlockVariableList.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/cm/node/token/EOF.java" afterPath="$PROJECT_DIR$/src/cm/node/token/EOF.java" />
-      <change beforePath="$PROJECT_DIR$/src/cm/node/token/Identifier.java" afterPath="$PROJECT_DIR$/src/cm/node/token/Identifier.java" />
+      <change beforePath="$PROJECT_DIR$/src/cm/node/base/Assignable.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/cm/node/block/BlockAssignment.java" afterPath="$PROJECT_DIR$/src/cm/node/block/BlockAssignment.java" />
+      <change beforePath="$PROJECT_DIR$/src/cm/node/block/BlockExpression.java" afterPath="$PROJECT_DIR$/src/cm/node/block/BlockExpression.java" />
       <change beforePath="$PROJECT_DIR$/src/cm/node/token/IntegerLiteral.java" afterPath="$PROJECT_DIR$/src/cm/node/token/IntegerLiteral.java" />
-      <change beforePath="$PROJECT_DIR$/src/cm/node/token/Node.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/cm/node/token/OperatorAddition.java" afterPath="$PROJECT_DIR$/src/cm/node/token/OperatorAddition.java" />
-      <change beforePath="$PROJECT_DIR$/src/cm/node/token/OperatorSubtraction.java" afterPath="$PROJECT_DIR$/src/cm/node/token/OperatorSubtraction.java" />
-      <change beforePath="$PROJECT_DIR$/src/cm/node/token/SingleValued.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/cm/node/token/Token.java" afterPath="$PROJECT_DIR$/src/cm/node/token/Token.java" />
+      <change beforePath="$PROJECT_DIR$/src/cm/node/token/SimpleToken.java" afterPath="$PROJECT_DIR$/src/cm/node/token/SimpleToken.java" />
       <change beforePath="$PROJECT_DIR$/src/cm/parser/Parser.java" afterPath="$PROJECT_DIR$/src/cm/parser/Parser.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/Main.java" afterPath="" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -49,8 +24,8 @@
       <file leaf-file-name="Parser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cm/parser/Parser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="427">
-              <caret line="143" column="83" lean-forward="false" selection-start-line="143" selection-start-column="83" selection-end-line="143" selection-end-column="83" />
+            <state relative-caret-position="259">
+              <caret line="123" column="16" lean-forward="false" selection-start-line="123" selection-start-column="16" selection-end-line="123" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -61,7 +36,7 @@
       <file leaf-file-name="SemanticAnalyzer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cm/analyzer/SemanticAnalyzer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
+            <state relative-caret-position="395">
               <caret line="225" column="0" lean-forward="true" selection-start-line="225" selection-start-column="0" selection-end-line="225" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -90,27 +65,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Compiler.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/cm/compiler/Compiler.java">
+      <file leaf-file-name="BlockExpression.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cm/node/block/BlockExpression.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="16" column="9" lean-forward="true" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
-              <folding />
+            <state relative-caret-position="60">
+              <caret line="8" column="42" lean-forward="false" selection-start-line="8" selection-start-column="42" selection-end-line="8" selection-end-column="42" />
+              <folding>
+                <element signature="e#632#633#0" expanded="true" />
+                <element signature="e#665#666#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Identifier.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cm/node/token/Identifier.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="20" column="9" lean-forward="true" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="program.txt" pinned="false" current-in-tab="false">
+      <file leaf-file-name="program.txt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/program.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="285">
@@ -143,10 +111,15 @@
       <find>argu</find>
       <find>repor</find>
       <find>parseDe</find>
+      <find>assignable</find>
+      <find>parsede</find>
     </findStrings>
     <replaceStrings>
       <replace>c</replace>
     </replaceStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$/src/cm/node</dir>
+    </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -197,19 +170,19 @@
         <option value="$PROJECT_DIR$/src/cm/node/token/IntegerLiteral.java" />
         <option value="$PROJECT_DIR$/src/cm/node/token/SimpleToken.java" />
         <option value="$PROJECT_DIR$/src/cm/node/block/BlockVariableList.java" />
-        <option value="$PROJECT_DIR$/src/cm/node/block/BlockExpression.java" />
         <option value="$PROJECT_DIR$/src/cm/node/block/BlockExpressionRest.java" />
-        <option value="$PROJECT_DIR$/src/cm/node/block/BlockAssignment.java" />
         <option value="$PROJECT_DIR$/src/cm/node/block/BlockPrint.java" />
         <option value="$PROJECT_DIR$/src/cm/analyzer/Analyzer.java" />
         <option value="$PROJECT_DIR$/src/cm/analyzer/SemanticException.java" />
         <option value="$PROJECT_DIR$/src/cm/analyzer/SemanticError.java" />
         <option value="$PROJECT_DIR$/src/cm/node/token/Identifier.java" />
-        <option value="$PROJECT_DIR$/src/cm/parser/Parser.java" />
         <option value="$PROJECT_DIR$/src/cm/analyzer/SemanticAnalyzer.java" />
-        <option value="$PROJECT_DIR$/program.txt" />
         <option value="$PROJECT_DIR$/src/test/Compiler.java" />
         <option value="$PROJECT_DIR$/src/cm/compiler/Compiler.java" />
+        <option value="$PROJECT_DIR$/src/cm/node/block/BlockAssignment.java" />
+        <option value="$PROJECT_DIR$/src/cm/node/block/BlockExpression.java" />
+        <option value="$PROJECT_DIR$/src/cm/parser/Parser.java" />
+        <option value="$PROJECT_DIR$/program.txt" />
       </list>
     </option>
   </component>
@@ -262,6 +235,35 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="cm" type="462c0819:PsiDirectoryNode" />
               <item name="compiler" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PLP-A1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PLP-A1" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="cm" type="462c0819:PsiDirectoryNode" />
+              <item name="lexer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PLP-A1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PLP-A1" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="cm" type="462c0819:PsiDirectoryNode" />
+              <item name="node" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PLP-A1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PLP-A1" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="cm" type="462c0819:PsiDirectoryNode" />
+              <item name="node" type="462c0819:PsiDirectoryNode" />
+              <item name="base" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PLP-A1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PLP-A1" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="cm" type="462c0819:PsiDirectoryNode" />
+              <item name="parser" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -518,7 +520,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27529413" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27529413" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -591,30 +593,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cm/analyzer.java" />
-    <entry file="file://$PROJECT_DIR$/src/cm/node/base/Node.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cm/node/base/DeepFirstTraversable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="17" lean-forward="false" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cm/node/base/Assignable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cm/node/base/ArithmeticOperator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -767,8 +745,8 @@
         <state relative-caret-position="105">
           <caret line="7" column="31" lean-forward="true" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
           <folding>
-            <element signature="e#185#186#0" expanded="true" />
-            <element signature="e#223#224#0" expanded="true" />
+            <element signature="e#129#130#0" expanded="true" />
+            <element signature="e#167#168#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -777,14 +755,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="15" column="33" lean-forward="true" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cm/node/token/IntegerLiteral.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="47" lean-forward="false" selection-start-line="4" selection-start-column="47" selection-end-line="4" selection-end-column="47" />
           <folding />
         </state>
       </provider>
@@ -856,17 +826,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cm/node/block/BlockExpression.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="39" column="47" lean-forward="false" selection-start-line="39" selection-start-column="47" selection-end-line="39" selection-end-column="47" />
-          <folding>
-            <element signature="e#715#716#0" expanded="true" />
-            <element signature="e#748#749#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cm/node/token/KeywordPrint.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -927,16 +886,6 @@
             <element signature="e#540#541#0" expanded="true" />
             <element signature="e#734#735#0" expanded="true" />
             <element signature="e#779#780#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cm/node/block/BlockAssignment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="16" column="39" lean-forward="false" selection-start-line="16" selection-start-column="39" selection-end-line="16" selection-end-column="39" />
-          <folding>
-            <element signature="e#500#501#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1030,13 +979,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cm/parser/Parser.java">
+    <entry file="file://$PROJECT_DIR$/src/cm/node/token/IntegerLiteral.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="143" column="83" lean-forward="false" selection-start-line="143" selection-start-column="83" selection-end-line="143" selection-end-column="83" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="30">
+          <caret line="2" column="47" lean-forward="false" selection-start-line="2" selection-start-column="47" selection-end-line="2" selection-end-column="47" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1048,17 +995,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/program.txt">
+    <entry file="file://$PROJECT_DIR$/src/cm/node/base/Assignable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="22" lean-forward="true" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
+        <state relative-caret-position="30">
+          <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cm/node/base/Node.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="11" lean-forward="false" selection-start-line="0" selection-start-column="11" selection-end-line="0" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cm/node/base/DeepFirstTraversable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="11" lean-forward="false" selection-start-line="0" selection-start-column="11" selection-end-line="0" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cm/node/block/BlockAssignment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="32" lean-forward="false" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#435#436#0" expanded="true" />
+            <element signature="e#468#469#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cm/analyzer/SemanticAnalyzer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
+        <state relative-caret-position="395">
           <caret line="225" column="0" lean-forward="true" selection-start-line="225" selection-start-column="0" selection-end-line="225" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1090,6 +1065,35 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="16" column="9" lean-forward="true" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cm/node/block/BlockExpression.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="8" column="42" lean-forward="false" selection-start-line="8" selection-start-column="42" selection-end-line="8" selection-end-column="42" />
+          <folding>
+            <element signature="e#632#633#0" expanded="true" />
+            <element signature="e#665#666#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cm/parser/Parser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="123" column="16" lean-forward="false" selection-start-line="123" selection-start-column="16" selection-end-line="123" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/program.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="22" lean-forward="true" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
           <folding />
         </state>
       </provider>

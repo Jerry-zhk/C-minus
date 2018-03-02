@@ -2,13 +2,11 @@ package cm.node.block;
 
 import cm.analyzer.Analyzer;
 import cm.node.base.ArithmeticOperator;
-import cm.node.base.Assignable;
 import cm.node.token.SimpleToken;
-import cm.node.token.Token;
 
 import java.util.ArrayList;
 
-public class BlockExpression extends Block implements Assignable {
+public class BlockExpression extends Block{
 
     private SimpleToken firstValue;
     private ArrayList<BlockExpressionRest> followings;

@@ -2,7 +2,6 @@ package cm.parser;
 
 import cm.lexer.Lexer;
 import cm.node.base.ArithmeticOperator;
-import cm.node.base.Assignable;
 import cm.node.token.SimpleToken;
 import cm.node.block.*;
 import cm.node.token.*;
@@ -114,6 +113,8 @@ public class Parser {
         Token token = lexer.peek();
         if (token instanceof KeywordVar) {
             lexer.next();
+        }else{
+            return null;
         }
 
         token = lexer.peek();
@@ -226,7 +227,7 @@ public class Parser {
                     op = (ArithmeticOperator) token;
 
                     token = lexer.peek();
-                    if (token instanceof Assignable) {
+                    if (token instanceof SimpleToken) {
                         lexer.next();
                         expression.addOperation(op, (SimpleToken) token);
                     } else {

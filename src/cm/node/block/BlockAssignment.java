@@ -2,7 +2,6 @@ package cm.node.block;
 
 import cm.analyzer.Analyzer;
 import cm.node.token.Identifier;
-import cm.node.base.Assignable;
 
 public class BlockAssignment extends BlockStatement {
 
