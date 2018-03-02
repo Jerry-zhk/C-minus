@@ -1,4 +1,6 @@
-package cm.node.token;
+package cm.node.block;
+
+import cm.analyzer.Analyzer;
 
 import java.util.ArrayList;
 
@@ -22,6 +24,14 @@ public class BlockProcedureList extends Block {
         return this.procedures.size();
     }
 
+    @Override
+    public void apply(Analyzer analyzer) {
+        analyzer.procedureListIn(this);
+        for (BlockProcedure p: procedures) {
+            p.apply(analyzer);
+        }
+        analyzer.procedureListOut(this);
+    }
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

@@ -76,18 +76,19 @@ public class Lexer {
                 hasNextToken = false;
             }
 
-
             switch (textState) {
                 case Digit:
                     if (!LexicalHelper.isDigit(c)) {
                         unread(c);
                         return getClassifiedToken(text.toString(), start_line, start_pos, textState);
                     }
+                    break;
                 case Letter:
                     if (!LexicalHelper.isLetter(c)) {
                         unread(c);
                         return getClassifiedToken(text.toString(), start_line, start_pos, textState);
                     }
+                    break;
                     // case Symbol: handled in case Initial
                 case Initial:
                     if (LexicalHelper.isDigit(c)) textState = LexicalHelper.State.Digit;
@@ -96,17 +97,21 @@ public class Lexer {
                         moveCursor(c);
                         return getClassifiedToken(String.valueOf((char) c), start_line, start_pos, LexicalHelper.State.Symbol);
                     }
-                default:
-                    moveCursor(c);
+                    break;
+
             }
 
-            if (!hasNextToken) {
+            if (hasNextToken)
+                moveCursor(c);
+            else
                 return new EOF(this.line, this.pos);
-            }
+
+
 
 
             if (!LexicalHelper.isSpace(c))
                 text.append((char) c);
+
 
         }
     }
@@ -127,6 +132,7 @@ public class Lexer {
     }
 
     private Token getClassifiedToken(String text, int line, int pos, LexicalHelper.State state) {
+
         switch (state) {
             case Symbol:
                 switch (text) {

@@ -7,6 +7,6 @@ public class EOF extends Token {
 
     @Override
     public String toString() {
-        return "EOF";
+        return "EOF at line " + super.getLine() + " position " + super.getPos();
     }
 }

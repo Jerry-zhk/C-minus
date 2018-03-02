@@ -1,5 +1,7 @@
 package cm.node.token;
 
+import cm.node.base.Node;
+
 public class Token extends Node {
 
     private String text;

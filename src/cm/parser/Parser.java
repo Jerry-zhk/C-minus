@@ -1,6 +1,10 @@
 package cm.parser;
 
 import cm.lexer.Lexer;
+import cm.node.base.ArithmeticOperator;
+import cm.node.base.Assignable;
+import cm.node.token.SimpleToken;
+import cm.node.block.*;
 import cm.node.token.*;
 
 import java.io.*;
@@ -39,9 +43,9 @@ public class Parser {
     private BlockProcedure parseProcedure() throws IOException, ParserException {
         Token token = lexer.peek();
 
-        Identifier procedureName;
-        BlockVariableList parameters = null;
-        BlockVariableList declaredVariables;
+        BlockProcedureName procedureName;
+        BlockParameterList parameters = null;
+        BlockDeclaration declaration;
         BlockStatementList statements;
 
         if (token instanceof KeywordProcedure) {
@@ -49,7 +53,7 @@ public class Parser {
             token = lexer.peek();
             if (token instanceof Identifier) {
                 lexer.next();
-                procedureName = (Identifier) token;
+                procedureName = new BlockProcedureName((Identifier) token);
             } else {
                 throw new ParserException("Unexpected token: " + token + ". Expecting identifier"); // expecting identifier
             }
@@ -58,7 +62,7 @@ public class Parser {
             if (token instanceof OperatorBracketLeft) {
                 lexer.next();
 
-                parameters = parseVariableList(true);
+                parameters = parseParameterList();
                 if (parameters == null || parameters.size() == 0)
                     throw new ParserException("Expecting parameter list."); // expecting parameters
 
@@ -70,7 +74,7 @@ public class Parser {
                 }
             }
 
-            declaredVariables = parseDeclaration();
+            declaration = parseDeclaration();
 
             token = lexer.peek();
             if (token instanceof KeywordStart) {
@@ -91,8 +95,8 @@ public class Parser {
             BlockProcedure procedure = new BlockProcedure(procedureName, statements);
             if (parameters != null)
                 procedure.setParameters(parameters);
-            if (declaredVariables != null)
-                procedure.setDeclaredVariables(declaredVariables);
+            if (declaration != null)
+                procedure.setDeclaredVariables(declaration);
             return procedure;
 
         } else {
@@ -102,45 +106,22 @@ public class Parser {
                 throw new ParserException("Unexpected token: " + token + ". Expecting keyword Procedure"); // expecting keyword Procedure
         }
 
-
     }
 
-    private BlockVariableList parseDeclaration() throws IOException, ParserException {
-        BlockVariableList declaredVariables = parseVariableList(false);
-        if (declaredVariables == null) return null;
-        Token token = lexer.peek();
-        if (token instanceof OperatorSemicolon) {
-            lexer.next();
-        } else {
-            throw new ParserException("Unexpected token: " + token + ". Expecting ;"); // expecting ;
-        }
-        return declaredVariables;
-    }
+    private BlockDeclaration parseDeclaration() throws IOException, ParserException {
+        BlockDeclaration declaration = new BlockDeclaration();
 
-    /** parameters / declarations
-     *  boolean must: control whether to (true)throw exception or (false)return null
-     */
-    private BlockVariableList parseVariableList(boolean must) throws IOException, ParserException {
-        BlockVariableList variableList = new BlockVariableList();
         Token token = lexer.peek();
         if (token instanceof KeywordVar) {
             lexer.next();
-        } else {
-            if (must)
-                throw new ParserException("Unexpected token: " + token + ". Expecting keyword Var"); // expecting keyword Var
-            else
-                return null;
         }
 
         token = lexer.peek();
         if (token instanceof Identifier) {
             lexer.next();
-            variableList.add(new BlockVariable((Identifier) token));
+            declaration.add(new BlockVariable((Identifier) token));
         } else {
-            if (must)
-                throw new ParserException("Unexpected token: " + token + ". Expecting identifier"); // expecting Identifier
-            else
-                return null;
+            throw new ParserException("Unexpected token: " + token + ". Expecting identifier"); // expecting Identifier
         }
 
         token = lexer.peek();
@@ -149,18 +130,59 @@ public class Parser {
             token = lexer.peek();
             if (token instanceof Identifier) {
                 lexer.next();
-                variableList.add(new BlockVariable((Identifier) token));
+                declaration.add(new BlockVariable((Identifier) token));
             } else {
-                if (must)
-                    throw new ParserException("Unexpected token: " + token + ". Expecting identifier"); // expecting Identifier
-                else
-                    return null;
+                throw new ParserException("Unexpected token: " + token + ". Expecting identifier"); // expecting Identifier
             }
             token = lexer.peek();
         }
 
-        return variableList;
+        token = lexer.peek();
+        if (token instanceof OperatorSemicolon) {
+            lexer.next();
+        } else {
+            throw new ParserException("Unexpected token: " + token + ". Expecting ;"); // expecting ;
+        }
+
+        if(declaration.size() == 0) return null;
+        return declaration;
     }
+
+
+    private BlockParameterList parseParameterList() throws IOException, ParserException {
+        BlockParameterList parameterList = new BlockParameterList();
+        Token token = lexer.peek();
+        if (token instanceof KeywordVar) {
+            lexer.next();
+        } else {
+            throw new ParserException("Unexpected token: " + token + ". Expecting keyword Var"); // expecting keyword Var
+        }
+
+        token = lexer.peek();
+        if (token instanceof Identifier) {
+            lexer.next();
+            parameterList.add(new BlockVariable((Identifier) token));
+        } else {
+                throw new ParserException("Unexpected token: " + token + ". Expecting identifier"); // expecting Identifier
+        }
+
+        token = lexer.peek();
+        while (token instanceof OperatorComma) {
+            lexer.next();
+            token = lexer.peek();
+            if (token instanceof Identifier) {
+                lexer.next();
+                parameterList.add(new BlockVariable((Identifier) token));
+            } else {
+                throw new ParserException("Unexpected token: " + token + ". Expecting identifier"); // expecting Identifier
+            }
+            token = lexer.peek();
+        }
+
+        return parameterList;
+    }
+
+
 
     private BlockStatementList parseStatementList() throws IOException, ParserException {
         BlockStatementList statementList = new BlockStatementList();
@@ -186,16 +208,17 @@ public class Parser {
             }
 
             BlockExpression expression = null;
-            Assignable first, following;
+            SimpleToken first;
             ArithmeticOperator op;
             token = lexer.peek();
-            if (token instanceof Assignable) {
+            if (token instanceof SimpleToken) {
                 lexer.next();
-                first = (Assignable) token;
+                first = (SimpleToken) token;
             } else {
                 throw new ParserException("Unexpected token: " + token + ". Expecting variable"); // expecting variable
             }
 
+            expression = new BlockExpression(first);
             token = lexer.peek();
             if (token instanceof ArithmeticOperator) {
                 while (token instanceof ArithmeticOperator) {
@@ -205,12 +228,7 @@ public class Parser {
                     token = lexer.peek();
                     if (token instanceof Assignable) {
                         lexer.next();
-                        following = (Assignable) token;
-                        if (expression == null) {
-                            expression = new BlockExpression(first, op, following);
-                        } else {
-                            expression.addOperation(op, following);
-                        }
+                        expression.addOperation(op, (SimpleToken) token);
                     } else {
                         throw new ParserException("Unexpected token: " + token + ". Expecting integer literal or variable"); // expecting integer literal or variable
                     }
@@ -218,7 +236,7 @@ public class Parser {
                 }
             }
 
-            statement = new BlockAssignment(variableBeingAssigned, (expression == null) ? first : expression);
+            statement = new BlockAssignment(variableBeingAssigned, expression);
 
         } else if (token instanceof KeywordCall) {
             lexer.next();
@@ -256,18 +274,18 @@ public class Parser {
         } else if (token instanceof KeywordPrint) {
             lexer.next();
             token = lexer.peek();
-            if (token instanceof SingleValued) {
+            if (token instanceof SimpleToken) {
                 lexer.next();
-                statement = new BlockPrint((SingleValued) token);
+                statement = new BlockPrint((SimpleToken) token);
             } else {
                 throw new ParserException("Unexpected token: " + token + ". Expecting integer literal or variable"); // expecting integer literal or variable
             }
         } else if (token instanceof KeywordExitZero) {
             lexer.next();
             token = lexer.peek();
-            if (token instanceof SingleValued) {
+            if (token instanceof SimpleToken) {
                 lexer.next();
-                statement = new BlockExitZero((SingleValued) token);
+                statement = new BlockExitZero((SimpleToken) token);
             } else {
                 throw new ParserException("Unexpected token: " + token + ". Expecting integer literal or variable"); // expecting integer literal or variable
             }
@@ -285,12 +303,12 @@ public class Parser {
         return statement;
     }
 
-    private BlockVariableList parseArgumentList() throws IOException, ParserException {
-        BlockVariableList variableList = new BlockVariableList();
+    private BlockArgumentList parseArgumentList() throws IOException, ParserException {
+        BlockArgumentList argumentList = new BlockArgumentList();
         Token token = lexer.peek();
         if (token instanceof Identifier) {
             lexer.next();
-            variableList.add(new BlockVariable((Identifier) token));
+            argumentList.add(new BlockVariable((Identifier) token));
         } else {
             throw new ParserException("Unexpected token: " + token + ". Expecting identifier"); // expecting Identifier
         }
@@ -301,14 +319,14 @@ public class Parser {
             token = lexer.peek();
             if (token instanceof Identifier) {
                 lexer.next();
-                variableList.add(new BlockVariable((Identifier) token));
+                argumentList.add(new BlockVariable((Identifier) token));
             } else {
                 throw new ParserException("Unexpected token: " + token + ". Expecting identifier"); // expecting Identifier
             }
             token = lexer.peek();
         }
 
-        return variableList;
+        return argumentList;
     }
 
 

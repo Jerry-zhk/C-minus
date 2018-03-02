@@ -1,18 +1,15 @@
-package cm.node.token;
+package cm.node.block;
+
+import cm.analyzer.Analyzer;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
-public class BlockVariableList extends Block {
+public abstract class BlockVariableList extends Block {
 
-    private ArrayList<BlockVariable> variables;
+    protected ArrayList<BlockVariable> variables;
 
     public BlockVariableList() {
         this.variables = new ArrayList<>();
-    }
-
-    public BlockVariableList(ArrayList<BlockVariable> variables) {
-        this.variables = variables;
     }
 
     public boolean add(BlockVariable parameter){
@@ -21,6 +18,10 @@ public class BlockVariableList extends Block {
 
     public int size(){
         return this.variables.size();
+    }
+
+    public ArrayList<BlockVariable> getVariables() {
+        return variables;
     }
 
     @Override

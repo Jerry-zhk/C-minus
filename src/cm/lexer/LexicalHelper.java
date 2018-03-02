@@ -2,7 +2,7 @@ package cm.lexer;
 
 public class LexicalHelper {
 
-    public enum State {Initial, Digit, Letter, Symbol}
+    public enum State {Initial, Digit, Letter, Symbol, EOF}
 
     public static boolean isDigit(int c){
         return c >= '0' && c <= '9';

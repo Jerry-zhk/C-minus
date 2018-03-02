@@ -1,6 +1,6 @@
-package cm.node.token;
+package cm.node.block;
 
-import java.util.ArrayList;
+import cm.analyzer.Analyzer;
 
 public class BlockProgram extends Block {
 
@@ -8,6 +8,13 @@ public class BlockProgram extends Block {
 
     public BlockProgram(BlockProcedureList procedures) {
         this.procedures = procedures;
+    }
+
+    @Override
+    public void apply(Analyzer analyzer) {
+        analyzer.programIn(this);
+        procedures.apply(analyzer);
+        analyzer.programOut(this);
     }
 
     @Override

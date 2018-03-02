@@ -1,4 +1,6 @@
-package cm.node.token;
+package cm.node.block;
+
+import cm.analyzer.Analyzer;
 
 import java.util.ArrayList;
 
@@ -20,6 +22,15 @@ public class BlockStatementList extends Block {
 
     public int size(){
         return this.statements.size();
+    }
+
+    @Override
+    public void apply(Analyzer analyzer) {
+        analyzer.statementListIn(this);
+        for (BlockStatement s: statements){
+            s.apply(analyzer);
+        }
+        analyzer.statementListOut(this);
     }
 
     @Override

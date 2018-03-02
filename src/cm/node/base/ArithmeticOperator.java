@@ -1,4 +1,4 @@
-package cm.node.token;
+package cm.node.base;
 
 public interface ArithmeticOperator {
 }
