@@ -6,19 +6,23 @@ import cm.node.token.Identifier;
 public class BlockCall extends BlockStatement {
 
     private Identifier procedureName;
-    private BlockVariableList arguments;
+    private BlockArgumentList arguments;
 
     public BlockCall(Identifier procedureName) {
         this.procedureName = procedureName;
     }
 
-    public BlockCall(Identifier procedureName, BlockVariableList arguments) {
+    public BlockCall(Identifier procedureName, BlockArgumentList arguments) {
         this.procedureName = procedureName;
         this.arguments = arguments;
     }
 
     public Identifier getProcedureName() {
         return procedureName;
+    }
+
+    public BlockArgumentList getArguments() {
+        return arguments;
     }
 
     @Override
@@ -37,5 +41,9 @@ public class BlockCall extends BlockStatement {
             sb.append("[").append(arguments).append("];");
         sb.append("\n");
         return sb.toString();
+    }
+
+    public int argumentsCount(){
+        return (arguments == null) ? 0 : arguments.size();
     }
 }

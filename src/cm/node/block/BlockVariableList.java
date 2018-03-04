@@ -12,8 +12,8 @@ public abstract class BlockVariableList extends Block {
         this.variables = new ArrayList<>();
     }
 
-    public boolean add(BlockVariable parameter){
-        return this.variables.add(parameter);
+    public boolean add(BlockVariable variable){
+        return this.variables.add(variable);
     }
 
     public int size(){

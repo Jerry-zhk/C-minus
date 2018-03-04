@@ -42,7 +42,7 @@ public class Parser {
     private BlockProcedure parseProcedure() throws IOException, ParserException {
         Token token = lexer.peek();
 
-        BlockProcedureName procedureName;
+        Identifier procedureName;
         BlockParameterList parameters = null;
         BlockDeclaration declaration;
         BlockStatementList statements;
@@ -52,7 +52,7 @@ public class Parser {
             token = lexer.peek();
             if (token instanceof Identifier) {
                 lexer.next();
-                procedureName = new BlockProcedureName((Identifier) token);
+                procedureName = (Identifier) token;
             } else {
                 throw new ParserException("Unexpected token: " + token + ". Expecting identifier"); // expecting identifier
             }
@@ -243,7 +243,7 @@ public class Parser {
             lexer.next();
             token = lexer.peek();
             Identifier procedureName;
-            BlockVariableList arguments = null;
+            BlockArgumentList arguments = null;
             if (token instanceof Identifier) {
                 lexer.next();
                 procedureName = (Identifier) token;

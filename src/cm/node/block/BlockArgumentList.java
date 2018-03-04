@@ -5,6 +5,7 @@ import cm.analyzer.Analyzer;
 public class BlockArgumentList extends BlockVariableList {
 
     public BlockArgumentList() {
+        super();
     }
 
     @Override

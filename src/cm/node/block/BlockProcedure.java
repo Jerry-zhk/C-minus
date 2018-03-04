@@ -5,7 +5,7 @@ import cm.node.token.Identifier;
 
 public class BlockProcedure extends Block {
 
-    private BlockProcedureName procedureName;
+    private Identifier name;
 
     private BlockParameterList parameters;
 
@@ -13,13 +13,13 @@ public class BlockProcedure extends Block {
 
     private BlockStatementList statements;
 
-    public BlockProcedure(BlockProcedureName procedureName, BlockStatementList statements) {
-        this.procedureName = procedureName;
+    public BlockProcedure(Identifier name, BlockStatementList statements) {
+        this.name = name;
         this.statements = statements;
     }
 
-    public BlockProcedure(BlockProcedureName procedureName, BlockParameterList parameters, BlockDeclaration declaration, BlockStatementList statements) {
-        this.procedureName = procedureName;
+    public BlockProcedure(Identifier name, BlockParameterList parameters, BlockDeclaration declaration, BlockStatementList statements) {
+        this.name = name;
         this.parameters = parameters;
         this.declaration = declaration;
         this.statements = statements;
@@ -33,11 +33,13 @@ public class BlockProcedure extends Block {
         this.declaration = declaration;
     }
 
+    public Identifier getName() {
+        return name;
+    }
+
     @Override
     public void apply(Analyzer analyzer) {
         analyzer.procedureIn(this);
-
-        procedureName.apply(analyzer);
 
         if(parameters  != null)
             parameters.apply(analyzer);
@@ -53,7 +55,7 @@ public class BlockProcedure extends Block {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Procedure ").append(procedureName).append(":\n");
+        sb.append("Procedure ").append(name).append(":\n");
         if(parameters != null)
             sb.append(" Parameters: ").append(parameters.toString()).append("\n");
         if(declaration != null)
@@ -62,4 +64,23 @@ public class BlockProcedure extends Block {
         sb.append("{\n").append(statements.toString()).append("}\n");
         return sb.toString();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+
+
+        boolean same = false;
+
+        if (obj != null && obj instanceof BlockProcedure)
+        {
+            same = (this.getName().equals(((BlockProcedure) obj).getName()));
+        }
+
+        return same;
+    }
+
+    public int expectingParametersCount(){
+        return (parameters == null) ? 0 : parameters.size();
+    }
+
 }

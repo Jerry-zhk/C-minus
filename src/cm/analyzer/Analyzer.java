@@ -40,14 +40,6 @@ public class Analyzer {
         defaultOut();
     }
 
-    public void procedureNameIn(BlockProcedureName procedureName){
-        defaultIn();
-    }
-
-    public void procedureNameOut(BlockProcedureName procedureName){
-        defaultOut();
-    }
-
     public void parameterListIn(BlockVariableList variableList){
         defaultIn();
     }

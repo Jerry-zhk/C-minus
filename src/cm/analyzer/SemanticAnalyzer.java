@@ -4,7 +4,6 @@ import cm.lexer.Lexer;
 import cm.node.block.*;
 import cm.node.token.Identifier;
 import cm.node.token.SimpleToken;
-import cm.node.token.Token;
 import cm.parser.Parser;
 import cm.parser.ParserException;
 
@@ -14,9 +13,9 @@ import java.util.ArrayList;
 public class SemanticAnalyzer extends Analyzer {
 
 
-    private ArrayList<Identifier> procedures;
-    private ArrayList<Identifier> proceduresCalled;
-    private ArrayList<Identifier>  localVariables;
+    private ArrayList<BlockProcedure> procedures;
+    private ArrayList<BlockCall> calls;
+    private ArrayList<Identifier> localVariables;
     private ArrayList<Identifier> localVariablesUsed;
 
     private ArrayList<SemanticError> errors;
@@ -26,7 +25,7 @@ public class SemanticAnalyzer extends Analyzer {
 
     public SemanticAnalyzer() {
         procedures = new ArrayList<>();
-        proceduresCalled = new ArrayList<>();
+        calls = new ArrayList<>();
         localVariables = new ArrayList<>();
         localVariablesUsed = new ArrayList<>();
         errors = new ArrayList<>();
@@ -42,20 +41,36 @@ public class SemanticAnalyzer extends Analyzer {
     public void programOut(BlockProgram program) {
         super.programOut(program);
 
-        if(!procedures.contains(new Identifier("Main", 0,0)))
+        boolean hasMain = false;
+        for (BlockProcedure p : procedures) {
+            if (p.getName().getText().equals("Main"))
+                hasMain = true;
+        }
+        if (!hasMain)
             addError("Missing < Main > procedure.");
 
         // check undefined procedure
-        proceduresCalled.removeAll(procedures);
-        for (Identifier p: proceduresCalled) {
-            addError("Undefined procedure called: " + p + ".");
+        for (BlockCall c : calls) {
+            boolean defined = false;
+            for (BlockProcedure p : procedures) {
+                if (p.getName().getText().equals(c.getProcedureName().getText())) {
+                    defined = true;
+                    if (p.expectingParametersCount() != c.argumentsCount()) {
+                        addError("Incorrect arguments for procedure < " + c.getProcedureName().getText() + " > , expecting " + p.expectingParametersCount() + " arguments but " + c.argumentsCount() + " given.");
+                    }
+                    break;
+                }
+            }
+            if (!defined)
+                addError("Undefined procedure: " + c.getProcedureName().getText() + ".");
+
         }
 
         // final
-        if(errors == null || errors.size() == 0){
+        if (errors == null || errors.size() == 0) {
             System.out.println("Ok");
-        }else{
-            for(SemanticError err: errors){
+        } else {
+            for (SemanticError err : errors) {
                 System.out.println(err);
             }
         }
@@ -65,6 +80,14 @@ public class SemanticAnalyzer extends Analyzer {
     @Override
     public void procedureIn(BlockProcedure procedure) {
         super.procedureIn(procedure);
+
+        if (procedures.contains(procedure))
+            addError("Redefined procedure " + procedure.getName().getText());
+        procedures.add(procedure);
+
+        localVariables = new ArrayList<>();
+        localVariablesUsed = new ArrayList<>();
+        isMain = (procedure.getName().getText().equals("Main"));
     }
 
     @Override
@@ -72,7 +95,7 @@ public class SemanticAnalyzer extends Analyzer {
         super.procedureOut(procedure);
         // check unused
         localVariables.removeAll(localVariablesUsed);
-        for(Identifier var: localVariables){
+        for (Identifier var : localVariables) {
             addError("Unused variable " + var + ".");
         }
         localVariables = null;
@@ -80,22 +103,13 @@ public class SemanticAnalyzer extends Analyzer {
 
     }
 
-    @Override
-    public void procedureNameIn(BlockProcedureName procedureName) {
-        super.procedureNameIn(procedureName);
-        procedures.add(procedureName.getIdentifier());
-        localVariables = new ArrayList<>();
-        localVariablesUsed = new ArrayList<>();
-        isMain = (procedureName.getIdentifier().getText().equals("Main"));
-    }
-
 
     @Override
     public void parameterListIn(BlockVariableList variableList) {
         super.parameterListIn(variableList);
-        if(isMain)
+        if (isMain)
             addError("Procedure < Main > cannot have parameters.");
-        else{
+        else {
             for (BlockVariable v : variableList.getVariables()) {
                 addLocalVariable(v.getIdentifier());
             }
@@ -153,7 +167,7 @@ public class SemanticAnalyzer extends Analyzer {
     public void expressionIn(BlockExpression expression) {
         super.expressionIn(expression);
         SimpleToken first = expression.getFirstValue();
-        if(first instanceof Identifier)
+        if (first instanceof Identifier)
             useLocalVariable((Identifier) first);
 
     }
@@ -167,7 +181,7 @@ public class SemanticAnalyzer extends Analyzer {
     public void expressionRestIn(BlockExpressionRest expressionRest) {
         super.expressionRestIn(expressionRest);
         SimpleToken value = expressionRest.getValue();
-        if(value instanceof Identifier)
+        if (value instanceof Identifier)
             useLocalVariable((Identifier) value);
     }
 
@@ -180,16 +194,17 @@ public class SemanticAnalyzer extends Analyzer {
     public void printIn(BlockPrint print) {
         super.printIn(print);
         SimpleToken token = print.getValue();
-        if(token instanceof Identifier)
+        if (token instanceof Identifier)
             useLocalVariable((Identifier) token);
     }
 
     @Override
     public void callIn(BlockCall call) {
         super.callIn(call);
-        Identifier procedureName = call.getProcedureName();
-        if(!proceduresCalled.contains(procedureName))
-            proceduresCalled.add(procedureName);
+        if (call.getProcedureName().getText().equals("Main"))
+            addError("Procedure < Main > cannot be called.");
+        else
+            calls.add(call);
     }
 
     @Override
@@ -204,27 +219,29 @@ public class SemanticAnalyzer extends Analyzer {
     public void exitZeroIn(BlockExitZero exitZero) {
         super.exitZeroIn(exitZero);
         SimpleToken token = exitZero.getValue();
-        if(token instanceof Identifier)
+        if (token instanceof Identifier)
             useLocalVariable((Identifier) token);
     }
 
-    private void addLocalVariable(Identifier variable){
-        if (!localVariables.contains(variable))
+    private void addLocalVariable(Identifier variable) {
+        if (localVariables.contains(variable))
+            addError("Redefine variables: " + variable.getText() + " in parameter list or declaration. Line " + variable.getLine() + ", Position " + variable.getPos() + ".");
+        else
             localVariables.add(variable);
     }
 
-    private void useLocalVariable(Identifier variable){
+    private void useLocalVariable(Identifier variable) {
         reportIfUnDeclared(variable);
-        if(!localVariablesUsed.contains(variable))
+        if (!localVariablesUsed.contains(variable))
             localVariablesUsed.add(variable);
     }
 
-    private void reportIfUnDeclared(Identifier variable){
+    private void reportIfUnDeclared(Identifier variable) {
         if (!localVariables.contains(variable))
             addError("Undeclared variable: " + variable + ".");
     }
 
-    private void addError(String message){
+    private void addError(String message) {
         errors.add(new SemanticError(message));
     }
 
