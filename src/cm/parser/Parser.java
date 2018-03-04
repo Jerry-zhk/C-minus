@@ -307,20 +307,20 @@ public class Parser {
     private BlockArgumentList parseArgumentList() throws IOException, ParserException {
         BlockArgumentList argumentList = new BlockArgumentList();
         Token token = lexer.peek();
-        if (token instanceof Identifier) {
+        if (token instanceof SimpleToken) {
             lexer.next();
-            argumentList.add(new BlockVariable((Identifier) token));
+            argumentList.add((SimpleToken) token);
         } else {
-            throw new ParserException("Unexpected token: " + token + ". Expecting identifier"); // expecting Identifier
+            throw new ParserException("Unexpected token: " + token + ". Expecting identifier or integer literal"); // expecting Identifier
         }
 
         token = lexer.peek();
         while (token instanceof OperatorComma) {
             lexer.next();
             token = lexer.peek();
-            if (token instanceof Identifier) {
+            if (token instanceof SimpleToken) {
                 lexer.next();
-                argumentList.add(new BlockVariable((Identifier) token));
+                argumentList.add((SimpleToken) token);
             } else {
                 throw new ParserException("Unexpected token: " + token + ". Expecting identifier"); // expecting Identifier
             }
@@ -332,7 +332,7 @@ public class Parser {
 
 
     public static void main(String[] args) throws IOException, ParserException {
-        File file = new File("program.txt");
+        File file = new File("task1/case5.txt");
         try (InputStream in = new FileInputStream(file)) {
             Reader reader = new InputStreamReader(in);
             // buffer for efficiency
@@ -340,7 +340,8 @@ public class Parser {
             PushbackReader pushbackReader = new PushbackReader(buffer);
             Lexer lexer = new Lexer(pushbackReader);
             Parser parser = new Parser(lexer);
-            System.out.println(parser.parse());
+            parser.parse();
+            System.out.println("Ok");
         } catch (ParserException e) {
             System.out.println("Program syntax error: " + e.getMessage());
         }

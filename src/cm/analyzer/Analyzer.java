@@ -113,11 +113,11 @@ public class Analyzer {
         defaultOut();
     }
 
-    public void  argumentListIn(BlockVariableList variableList){
+    public void argumentListIn(BlockArgumentList argumentList){
         defaultIn();
     }
 
-    public void  argumentListOut(BlockVariableList variableList){
+    public void argumentListOut(BlockArgumentList argumentList){
         defaultOut();
     }
 

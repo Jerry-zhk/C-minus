@@ -208,10 +208,11 @@ public class SemanticAnalyzer extends Analyzer {
     }
 
     @Override
-    public void argumentListIn(BlockVariableList variableList) {
-        super.argumentListIn(variableList);
-        for (BlockVariable v : variableList.getVariables()) {
-            useLocalVariable(v.getIdentifier());
+    public void argumentListIn(BlockArgumentList argumentList) {
+        super.argumentListIn(argumentList);
+        for (SimpleToken v : argumentList.getArguments()) {
+            if(v instanceof Identifier)
+                useLocalVariable((Identifier) v);
         }
     }
 
@@ -246,7 +247,7 @@ public class SemanticAnalyzer extends Analyzer {
     }
 
     public static void main(String[] args) throws IOException {
-        File file = new File("program.txt");
+        File file = new File("task2/case5.txt");
         try (InputStream in = new FileInputStream(file)) {
             Reader reader = new InputStreamReader(in);
             // buffer for efficiency
